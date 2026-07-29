@@ -20,7 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
-Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories.index');
-Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products.index');
-Route::get('/admin/about', [DashboardController::class, 'about'])->name('admin.about');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/about', [DashboardController::class, 'about'])->name('about');
+});
